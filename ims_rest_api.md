@@ -121,6 +121,7 @@ content = {"supplykeyword":"超市","companycode":"1"}
 |supply/code | Number(18)| 供应商代码|
 |supply/name | String | 供应商名称|
 响应样例：
+   
 {
     "err_msg": "ok",
     "ret_code": 0,
@@ -153,6 +154,7 @@ content = {"supplykeyword":"超市","companycode":"1"}
         ]
     }
 }
+
 ### 3.1.2 商品渐近查询
 url: base/product/query
 
