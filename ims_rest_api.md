@@ -112,7 +112,7 @@ url:base/supply/query
 | supplykeyword| String| 必填 | | 供应商名称关键字|
 
 请求样例：
-
+content = {"supplykeyword":"超市","companycode":"1"}
 响应参数：
 
 | 参数名  | 类型   | 参数描述 |
@@ -121,7 +121,38 @@ url:base/supply/query
 |supply/code | Number(18)| 供应商代码|
 |supply/name | String | 供应商名称|
 响应样例：
-
+{
+    "err_msg": "ok",
+    "ret_code": 0,
+    "result": {
+        "supply": [
+            {
+                "code": 1,
+                "name": "久久超市"
+            },
+            {
+                "code": 2,
+                "name": "联华超市"
+            },
+            {
+                "code": 910340743049121792,
+                "name": "物美超市"
+            },
+            {
+                "code": 910747998189916160,
+                "name": "好又多超市"
+            },
+            {
+                "code": 910793815894396928,
+                "name": "天猫超市"
+            },
+            {
+                "code": 910794875660800000,
+                "name": "百度超市"
+            }
+        ]
+    }
+}
 ### 3.1.2 商品渐近查询
 url: base/product/query
 
