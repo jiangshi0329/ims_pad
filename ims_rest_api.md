@@ -18,9 +18,9 @@
 | 3.2.1 | 保存进货单   | purchase/order/add       |
 | 3.2.2 | 查询进货单   | purchase/order/query     |
 | 3.2.3 | 进货单详情   | purchase/order/detail    |
-| 3.2.3 | 查询付款信息  | purchase/payinfo/query   |
-| 3.2.4 | 保存付款单   | purchase/pay/add         |
-| 3.2.5 | 查询付款单   | purchase/pay/query       |
+| 3.2.4 | 查询付款信息  | purchase/payinfo/query   |
+| 3.2.5 | 保存付款单   | purchase/pay/add         |
+| 3.2.6 | 查询付款单   | purchase/pay/query       |
 | 3.3   | 用户      |                          |
 | 3.3.1 | 用户登录    | sys/login                |
 | 3.3.2 | 用户信息    | sys/user/get             |
@@ -401,8 +401,8 @@ url:purchase/payinfo/query
 
 请求参数：
 
-| 参数名       | 类型         | 限制   | 默认值  | 参数描述  |
-| --------- | ---------- | ---- | ---- | ----- |
+| 参数名        | 类型         | 限制   | 默认值  | 参数描述  |
+| ---------- | ---------- | ---- | ---- | ----- |
 | supplycode | Number(18) | 必填   |      | 供应商代码 |
 
 
@@ -410,21 +410,21 @@ url:purchase/payinfo/query
 
 响应参数：
 
-| 参数名                               | 类型         | 参数描述            |
-| --------------------------------- | ---------- | --------------- |
-| pay                     | List<Node>       | 付款单列表             |
-| pay/accountname           | String | 账号名称              |
-| pay/accountno          | String     | 账号：卡号/支付宝账号等 |
-| pay/paydate        | String     | 付款日期:格式yyyymmdd |
-| pay/amount               | Number(11)  | 金额(分)  |
-| pay/remark             | String | 备注            |
-| unpay   | List<Node>     | 未结清的相关单据列表(进货单/进货退货单/红冲单)    |
-| unpay/type | Number(2)     | 单据类型:1-进货单;2-进货退货单;3-红冲单    |
-| unpay/no    | String     | 单据编号            |
-| unpay/code        | Number(18)     | 单据代码            |
-| unpay/operatedate       | String | 操作日期:格式yyyymmdd  |
-| unpay/amount       | Number(11)     | 金额(分)   |
-| unpay/remark       | String | 备注           |
+| 参数名               | 类型         | 参数描述                      |
+| ----------------- | ---------- | ------------------------- |
+| pay               | List<Node> | 付款单列表                     |
+| pay/accountname   | String     | 账号名称                      |
+| pay/accountno     | String     | 账号：卡号/支付宝账号等              |
+| pay/paydate       | String     | 付款日期:格式yyyymmdd           |
+| pay/amount        | Number(11) | 金额(分)                     |
+| pay/remark        | String     | 备注                        |
+| unpay             | List<Node> | 未结清的相关单据列表(进货单/进货退货单/红冲单) |
+| unpay/type        | Number(2)  | 单据类型:1-进货单;2-进货退货单;3-红冲单  |
+| unpay/no          | String     | 单据编号                      |
+| unpay/code        | Number(18) | 单据代码                      |
+| unpay/operatedate | String     | 操作日期:格式yyyymmdd           |
+| unpay/amount      | Number(11) | 金额(分)                     |
+| unpay/remark      | String     | 备注                        |
 
 ### 3.2.5 保存付款单
 url:purchase/pay/add
@@ -437,17 +437,17 @@ url:purchase/pay/add
 
 请求参数：
 
-| 参数名                 | 类型         | 限制   | 默认值  | 参数描述  |
-| ------------------- | ---------- | ---- | ---- | -------------- |
-| companycode         | Number(18) | 必填   |      | 公司代码           |
-| supplycode          | Number(18) | 必填   |      | 供应商代码          |
-| accountcode         | Number(18) | 必填   |      | 付款方式           |
-| payno         | String | 必填   |      | 付款单号           |
-| paytype         | Number(2) | 必填   |      | 付款类型:1-付款 2-预付款 |
-| payamount           | Number(11) | 必填   |      | 付款金额           |
-| brokerage           | String     | 必填   |      | 经手人            |
-| paydate        | String     | 必填   |      | 付款日期(YYYYMMDD) |
-| remark              | String     | 必填   |      | 备注             |
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述            |
+| ----------- | ---------- | ---- | ---- | --------------- |
+| companycode | Number(18) | 必填   |      | 公司代码            |
+| supplycode  | Number(18) | 必填   |      | 供应商代码           |
+| accountcode | Number(18) | 必填   |      | 付款方式            |
+| payno       | String     | 必填   |      | 付款单号            |
+| paytype     | Number(2)  | 必填   |      | 付款类型:1-付款 2-预付款 |
+| payamount   | Number(11) | 必填   |      | 付款金额            |
+| brokerage   | String     | 必填   |      | 经手人             |
+| paydate     | String     | 必填   |      | 付款日期(YYYYMMDD)  |
+| remark      | String     | 必填   |      | 备注              |
 
 
 请求样例：
@@ -469,31 +469,31 @@ url:purchase/order/query
 
 请求参数：
 
-| 参数名         | 类型         | 限制   | 默认值  | 参数描述           |
-| ----------- | ---------- | ---- | ---- | -------------- |
-| companycode | Number(18) | 必填   |      | 公司代码           |
-| supplycode  | Number(18) | 可选   |      | 供应商代码          |
-| paytype     | Number(2)     | 可选   |      | 付款类型:1-付款 2-预付款 |
-| accountcode | Number(18) | 可选   |      | 付款方式           |
-| startdate   | String     | 必填   |      | 开始日期(YYYYMMDD) |
-| enddate     | String     | 必填   |      | 截止日期(YYYYMMDD) |
-| pageno      | Number(11) | 可选   | 1    | 页码             |
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述            |
+| ----------- | ---------- | ---- | ---- | --------------- |
+| companycode | Number(18) | 必填   |      | 公司代码            |
+| supplycode  | Number(18) | 可选   |      | 供应商代码           |
+| paytype     | Number(2)  | 可选   |      | 付款类型:1-付款 2-预付款 |
+| accountcode | Number(18) | 可选   |      | 付款方式            |
+| startdate   | String     | 必填   |      | 开始日期(YYYYMMDD)  |
+| enddate     | String     | 必填   |      | 截止日期(YYYYMMDD)  |
+| pageno      | Number(11) | 可选   | 1    | 页码              |
 
 
 请求样例：
 
 响应参数：
 
-| 参数名                        | 类型         | 参数描述            |
-| -------------------------- | ---------- | --------------- |
-| pay              | List<Node> | 付款单列表           |
-| pay/no      | String     | 单号              |
-| pay/supplyname   | String     | 供应商             |
-| pay/amount   | Number(18)     | 金额(分)             |
-| paytype     | Number(2)     | 付款类型:1-付款 2-预付款 |
-| pay/accountname   | String     | 付款方式            |
-| pay/accountno   | String     | 付款账号           |
-| pay/paydate | String     | 付款日期:格式yyyymmdd |
+| 参数名             | 类型         | 参数描述            |
+| --------------- | ---------- | --------------- |
+| pay             | List<Node> | 付款单列表           |
+| pay/no          | String     | 单号              |
+| pay/supplyname  | String     | 供应商             |
+| pay/amount      | Number(18) | 金额(分)           |
+| paytype         | Number(2)  | 付款类型:1-付款 2-预付款 |
+| pay/accountname | String     | 付款方式            |
+| pay/accountno   | String     | 付款账号            |
+| pay/paydate     | String     | 付款日期:格式yyyymmdd |
 
 ## 3.3 用户
 
