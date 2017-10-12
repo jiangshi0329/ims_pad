@@ -302,7 +302,7 @@ url:purchase/order/add
 | product             | List<Node> | 必填   |      | 进货商品清单         |
 | product/productcode | Number(18) | 必填   |      | 商品代码           |
 | product/number      | Number(11) | 必填   |      | 数量             |
-| product/price       | Number(11) | 必填   |      | 价格             |
+| product/price       | Number(11) | 必填   |      | 价格 单位(分)      |
 | product/depotcode   | Number(11) | 必填   |      | 仓库代码           |
 | accountcode         | Number(18) | 必填   |      | 付款方式           |
 | payamount           | Number(11) | 必填   |      | 付款金额           |
