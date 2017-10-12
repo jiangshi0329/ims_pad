@@ -298,6 +298,7 @@ url:purchase/order/add
 | ------------------- | ---------- | ---- | ---- | -------------- |
 | companycode         | Number(18) | 必填   |      | 公司代码           |
 | supplycode          | Number(18) | 必填   |      | 供应商代码          |
+| orderno             | Number(18) | 必填   |      | 进货单单号          |
 | product             | List<Node> | 必填   |      | 进货商品清单         |
 | product/productcode | Number(18) | 必填   |      | 商品代码           |
 | product/number      | Number(11) | 必填   |      | 数量             |
