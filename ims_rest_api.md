@@ -460,7 +460,7 @@ url:purchase/pay/add
 | /    |      |      |
 
 ### 3.2.6 查询付款单
-url:purchase/order/query
+url:purchase/pay/query
 
 方法：POST
 
