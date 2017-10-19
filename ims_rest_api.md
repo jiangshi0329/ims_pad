@@ -402,10 +402,10 @@ url:purchase/payinfo/query
 
 请求参数：
 
-| 参数名        | 类型         | 限制   | 默认值  | 参数描述  |
-| ---------- | ---------- | ---- | ---- | ----- |
-| companycode | Number(18) | 必填   |      | 公司代码 |
-| supplycode | Number(18) | 必填   |      | 供应商代码 |
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述  |
+| ----------- | ---------- | ---- | ---- | ----- |
+| companycode | Number(18) | 必填   |      | 公司代码  |
+| supplycode  | Number(18) | 必填   |      | 供应商代码 |
 
 
 请求样例：
@@ -621,19 +621,21 @@ url:message/history/list
 | ---------- | ---------- | ---- | ---- | --------------------------- |
 | auid       | Number(18) | 必填   |      | 用户唯一识别码                     |
 | recenttime | String     | 可选   |      | 第一页读取消息时间：格式为yyyymmddhhmiss |
+| pageno     | Number(11) | 可选   | 1    | 页码                          |
 
 请求样例：
 
 响应参数：
 
-| 参数名                       | 类型         | 参数描述                   |
-| ------------------------- | ---------- | ---------------------- |
-| message                   | List<Node> | 消息列表                   |
-| message/readflag          | Number(2)  | 已读标记：0-未读;1-已读         |
-| message/content           | String     | 消息内容                   |
-| message/notifytime        | String     | 通知时间：格式为yyyymmddhhmiss |
-| message/extra             | Node       | 扩展信息                   |
-| message/extra/productname | String     | 商品名字                   |
-| message/extra/productno   | String     | 商品编号                   |
-| message/extra/stock       | Number     | 库存数量                   |
-| message/extra/unit        | String     | 库存单位                   |
+| 参数名                       | 类型         | 参数描述                        |
+| ------------------------- | ---------- | --------------------------- |
+| recenttime                | String     | 第一页读取消息时间：格式为yyyymmddhhmiss |
+| message                   | List<Node> | 消息列表                        |
+| message/readflag          | Number(2)  | 已读标记：0-未读;1-已读              |
+| message/content           | String     | 消息内容                        |
+| message/notifytime        | String     | 通知时间：格式为yyyymmddhhmiss      |
+| message/extra             | Node       | 扩展信息                        |
+| message/extra/productname | String     | 商品名字                        |
+| message/extra/productno   | String     | 商品编号                        |
+| message/extra/stock       | Number     | 库存数量                        |
+| message/extra/unit        | String     | 库存单位                        |
