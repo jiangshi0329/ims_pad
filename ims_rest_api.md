@@ -14,6 +14,7 @@
 | 3.1.3 | 仓库选单    | base/depot/list          |
 | 3.1.4 | 付款方式选单  | base/account/list        |
 | 3.1.5 | 获取单号    | sys/sequence/get         |
+| 3.1.6 | 客户渐进查询  | base/custom/query        |
 | 3.2   | 进货业务    |                          |
 | 3.2.1 | 保存进货单   | purchase/order/add       |
 | 3.2.2 | 查询进货单   | purchase/order/query     |
@@ -28,6 +29,14 @@
 | 3.4   | 消息      |                          |
 | 3.4.1 | 最新消息数   | message/unreadnumber/get |
 | 3.4.2 | 消息列表    | message/history/list     |
+| 3.4.3 | 读消息     | message/single/read      |
+| 3.5   | 销货业务    |                          |
+| 3.5.1 | 保存销货单   | sales/order/add          |
+| 3.5.2 | 查询销货单   | sales/order/query        |
+| 3.5.3 | 销货单详情   | sales/order/detail       |
+| 3.5.4 | 查询收款信息  | sales/collectinfo/query  |
+| 3.5.5 | 保存收款单   | sales/collect/add        |
+| 3.5.6 | 查询收款单   | sales/collect/query      |
 
 # 2. 协议规范
 
@@ -278,6 +287,34 @@ url:sys/sequence/get
 | ---- | ------ | ---- |
 | no   | String | 单号   |
 
+响应样例：
+
+### 3.1.6 客户渐近查询
+
+url:base/custom/query
+
+方法：POST
+
+功能描述：输入关键字，按客户名称模糊查询，仅显示前10个
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名           | 类型         | 限制   | 默认值  | 参数描述    |
+| ------------- | ---------- | ---- | ---- | ------- |
+| companycode   | Number(18) | 必填   |      | 公司代码    |
+| customkeyword | String     | 必填   |      | 客户名称关键字 |
+
+请求样例：
+
+响应参数：
+
+| 参数名         | 类型         | 参数描述   |
+| ----------- | ---------- | ------ |
+| custom      | List<Node> | 客户节点列表 |
+| custom/code | Number(18) | 客户代码   |
+| custom/name | String     | 客户名称   |
 响应样例：
 
 
@@ -631,6 +668,7 @@ url:message/history/list
 | ------------------------- | ---------- | --------------------------- |
 | recenttime                | String     | 第一页读取消息时间：格式为yyyymmddhhmiss |
 | message                   | List<Node> | 消息列表                        |
+| message/messagecode       | Number(18) | 消息代码                        |
 | message/readflag          | Number(2)  | 已读标记：0-未读;1-已读              |
 | message/content           | String     | 消息内容                        |
 | message/notifytime        | String     | 通知时间：格式为yyyymmddhhmiss      |
@@ -639,3 +677,26 @@ url:message/history/list
 | message/extra/productno   | String     | 商品编号                        |
 | message/extra/stock       | Number     | 库存数量                        |
 | message/extra/unit        | String     | 库存单位                        |
+
+### 3.4.3 读消息
+url:message/single/read
+
+方法：POST
+
+功能描述：标记单条消息为已读状态
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述 |
+| ----------- | ---------- | ---- | ---- | ---- |
+| messagecode | Number(18) | 必填   |      | 消息代码 |
+
+请求样例：
+
+响应参数：
+
+| 参数名  | 类型   | 参数描述 |
+| ---- | ---- | ---- |
+| /    |      |      |
