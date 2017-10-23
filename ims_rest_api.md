@@ -6,37 +6,48 @@
 
 # 1. 目录
 
-| 编号    | 名称      | url                      |
-| ----- | ------- | ------------------------ |
-| 3.1   | 通用      |                          |
-| 3.1.1 | 供应商渐近查询 | base/supply/query        |
-| 3.1.2 | 商品渐近查询  | base/product/query       |
-| 3.1.3 | 仓库选单    | base/depot/list          |
-| 3.1.4 | 付款方式选单  | base/account/list        |
-| 3.1.5 | 获取单号    | sys/sequence/get         |
-| 3.1.6 | 客户渐进查询  | base/custom/query        |
-| 3.2   | 进货业务    |                          |
-| 3.2.1 | 保存进货单   | purchase/order/add       |
-| 3.2.2 | 查询进货单   | purchase/order/query     |
-| 3.2.3 | 进货单详情   | purchase/order/detail    |
-| 3.2.4 | 查询付款信息  | purchase/payinfo/query   |
-| 3.2.5 | 保存付款单   | purchase/pay/add         |
-| 3.2.6 | 查询付款单   | purchase/pay/query       |
-| 3.3   | 用户      |                          |
-| 3.3.1 | 用户登录    | sys/login                |
-| 3.3.2 | 用户信息    | sys/user/get             |
-| 3.3.3 | 密码修改    | sys/password/change      |
-| 3.4   | 消息      |                          |
-| 3.4.1 | 最新消息数   | message/unreadnumber/get |
-| 3.4.2 | 消息列表    | message/history/list     |
-| 3.4.3 | 读消息     | message/single/read      |
-| 3.5   | 销货业务    |                          |
-| 3.5.1 | 保存销货单   | sales/order/add          |
-| 3.5.2 | 查询销货单   | sales/order/query        |
-| 3.5.3 | 销货单详情   | sales/order/detail       |
-| 3.5.4 | 查询收款信息  | sales/collectinfo/query  |
-| 3.5.5 | 保存收款单   | sales/collect/add        |
-| 3.5.6 | 查询收款单   | sales/collect/query      |
+| 编号    | 名称        | url                                     |
+| ----- | --------- | --------------------------------------- |
+| 3.1   | 通用        |                                         |
+| 3.1.1 | 供应商渐近查询   | base/supply/query                       |
+| 3.1.2 | 商品渐近查询    | base/product/query                      |
+| 3.1.3 | 仓库选单      | base/depot/list                         |
+| 3.1.4 | 付款方式选单    | base/account/list                       |
+| 3.1.5 | 获取单号      | sys/sequence/get                        |
+| 3.1.6 | 客户渐进查询    | base/custom/query                       |
+| 3.2   | 进货业务      |                                         |
+| 3.2.1 | 保存进货单     | sales/order/add                         |
+| 3.2.2 | 查询进货单     | purchase/order/query                    |
+| 3.2.3 | 进货单详情     | purchase/order/detail                   |
+| 3.2.4 | 查询付款信息    | purchase/payinfo/query                  |
+| 3.2.5 | 保存付款单     | purchase/pay/add                        |
+| 3.2.6 | 查询付款单     | purchase/pay/query                      |
+| 3.3   | 用户        |                                         |
+| 3.3.1 | 用户登录      | sys/login                               |
+| 3.3.2 | 用户信息      | sys/user/get                            |
+| 3.3.3 | 密码修改      | sys/password/change                     |
+| 3.4   | 消息        |                                         |
+| 3.4.1 | 最新消息数     | message/unreadnumber/get                |
+| 3.4.2 | 消息列表      | message/history/list                    |
+| 3.4.3 | 读消息       | message/single/read                     |
+| 3.5   | 销货业务      |                                         |
+| 3.5.1 | 保存销货单     | sales/order/add                         |
+| 3.5.2 | 打印销货单     | sales/order/print                       |
+| 3.5.3 | 分享销货单     | sales/order/share                       |
+| 3.5.4 | 查询销货单     | sales/order/query                       |
+| 3.5.5 | 销货单详情     | sales/order/detail                      |
+| 3.5.6 | 查询收款信息    | sales/collectinfo/query                 |
+| 3.5.7 | 保存收款单     | sales/collect/add                       |
+| 3.5.8 | 查询收款单     | sales/collect/query                     |
+| 3.6   | 仓库管理      |                                         |
+| 3.6.1 | 查询销售单     | inventory/salesorder/query              |
+| 3.6.2 | 查询出库记录    | inventory/historydelivery/query         |
+| 3.6.3 | 查询销售单出库信息 | inventory/salesorder/deliveryinfo/query |
+| 3.6.4 | 商品出库      | inventory/delivery/add                  |
+| 3.6.5 | 查询出库单     | inventory/delivery/query                |
+| 3.6.6 | 查询出库单详情   | inventory/delivery/detail               |
+| 3.6.7 | 查询商品库存    | inventory/stock/query                   |
+
 
 # 2. 协议规范
 
@@ -433,7 +444,7 @@ url:purchase/payinfo/query
 
 方法：POST
 
-功能描述：根据进货单代码查详情
+功能描述：根据公司和供应商查付款信息包括已付款和未结清的进货单/进货退货单/进货红冲单
 
 版本支持：1.0.0
 
@@ -700,3 +711,520 @@ url:message/single/read
 | 参数名  | 类型   | 参数描述 |
 | ---- | ---- | ---- |
 | /    |      |      |
+
+## 3.5 进货业务
+
+### 3.5.1 保存销售单
+url:sales/order/add
+
+方法：POST
+
+功能描述：新增销售单的保存
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名                 | 类型         | 限制   | 默认值  | 参数描述           |
+| ------------------- | ---------- | ---- | ---- | -------------- |
+| companycode         | Number(18) | 必填   |      | 公司代码           |
+| customcode          | Number(18) | 必填   |      | 客户代码           |
+| orderno             | Number(18) | 必填   |      | 销货单单号          |
+| product             | List<Node> | 必填   |      | 进货商品清单         |
+| product/productcode | Number(18) | 必填   |      | 商品代码           |
+| product/number      | Number(11) | 必填   |      | 数量             |
+| product/price       | Number(11) | 必填   |      | 价格 单位(分)       |
+| product/depotcode   | Number(11) | 必填   |      | 仓库代码           |
+| accountcode         | Number(18) | 必填   |      | 收款方式           |
+| payamount           | Number(11) | 可选   |      | 收款金额           |
+| vehiclelicence      | String     | 可选   |      | 车牌号            |
+| brokerage           | String     | 必填   |      | 经手人            |
+| saledate            | String     | 必填   |      | 销货日期(YYYYMMDD) |
+| remark              | String     | 必填   |      | 备注             |
+| multidelivery       | Number(2)  | 必填   |      | 多次出库:0-否 1-是   |
+| stalldelivery       | Number(2)  | 必填   |      | 档口出货:0-否 1-是   |
+
+注意：选择多次出库，销售单必须结清，即收款金额=应收款；档口出货应生成出库记录；
+
+请求样例：
+
+响应参数：
+
+| 参数名  | 类型   | 参数描述 |
+| ---- | ---- | ---- |
+| /    |      |      |
+
+### 3.5.2 打印销售单（待确认）
+url:sales/order/print
+
+方法：POST
+
+功能描述：根据销售单代码，本地或远程打印销售单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名       | 类型         | 限制   | 默认值  | 参数描述           |
+| --------- | ---------- | ---- | ---- | -------------- |
+| ordercode | Number(18) | 必填   |      | 销售单代码          |
+| type      | Number(2)  | 必填   |      | 打印类型：1-本地 2-远程 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名   | 类型        | 参数描述          |
+| ----- | --------- | ------------- |
+| error | Number(2) | 错误信息，详见错误码对应表 |
+
+错误码对应表
+| 错误码  | 错误描述         |
+| ---- | ------------ |
+| 0    | success      |
+| 8    | 打印机信息错误,参数有误 |
+| 9    | 连接打印机失败,参数有误 |
+| 10   | 权限不足         |
+| 12   | 缺少必要参数       |
+| 13   | 打印失败,参数有误    |
+| 33   | Uuid不合法      |
+
+### 3.5.3 分享销售单
+url:sales/order/share
+
+方法：POST
+
+功能描述：根据销售单代码，向其他应用（如qq、微信等）分享销售单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名       | 类型         | 限制   | 默认值  | 参数描述  |
+| --------- | ---------- | ---- | ---- | ----- |
+| ordercode | Number(18) | 必填   |      | 销售单代码 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名      | 类型     | 参数描述   |
+| -------- | ------ | ------ |
+| shareurl | String | 分享链接地址 |
+
+### 3.5.4 查询进货单
+url:sales/order/query
+
+方法：POST
+
+功能描述：根据客户、销售单号、商品和起止时间查询销售单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述           |
+| ----------- | ---------- | ---- | ---- | -------------- |
+| companycode | Number(18) | 必填   |      | 公司代码           |
+| customcode  | Number(18) | 可选   |      | 客户代码           |
+| orderno     | String     | 可选   |      | 进货单编号          |
+| productcode | Number(18) | 可选   |      | 商品代码           |
+| startdate   | String     | 必填   |      | 开始日期(YYYYMMDD) |
+| enddate     | String     | 必填   |      | 截止日期(YYYYMMDD) |
+| pageno      | Number(11) | 可选   | 1    | 页码             |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                   | 类型         | 参数描述            |
+| --------------------- | ---------- | --------------- |
+| salesorder            | List<Node> | 销售单列表           |
+| salesorder/ordercode  | Number(18) | 代码              |
+| salesorder/orderno    | String     | 单号              |
+| salesorder/customname | String     | 客户名称            |
+| salesorder/saledate   | String     | 销售日期:格式yyyymmdd |
+| salesorder/state      | Number(2)  | 状态：0-未结清;1-已结清  |
+
+### 3.5.5 销售单详情
+url:sales/order/detail
+
+方法：POST
+
+功能描述：根据销售单代码查详情
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名       | 类型         | 限制   | 默认值  | 参数描述  |
+| --------- | ---------- | ---- | ---- | ----- |
+| ordercode | Number(18) | 必填   |      | 销售单代码 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                            | 类型         | 参数描述            |
+| ------------------------------ | ---------- | --------------- |
+| salesorder                     | Node       | 销售单             |
+| salesorder/ordercode           | Number(18) | 代码              |
+| salesorder/customname          | String     | 客户              |
+| salesorder/salesdate           | String     | 进货日期:格式yyyymmdd |
+| salesorder/state               | Number(2)  | 状态：0-未结清;1-已结清  |
+| salesorder/product             | List<Node> | 商品清单            |
+| salesorder/product/productno   | String     | 商品编号            |
+| salesorder/product/productname | String     | 商品名称            |
+| salesorder/product/category    | String     | 商品分类            |
+| salesorder/product/unit        | String     | 库存单位            |
+| salesorder/product/stock       | Number(11) | 库存数量            |
+| salesorder/product/depot       | String     | 仓库名称            |
+| salesorder/product/price       | Number(11) | 价格(分)           |
+| salesorder/product/amount      | Number(11) | 金额(分)           |
+
+### 3.5.6 查询收款信息
+url:purchase/collectinfo/query
+
+方法：POST
+
+功能描述：根据公司代码和客户代码收款信息，包括已收款和未结清的销售单/销售退货单/销售红冲单等
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述 |
+| ----------- | ---------- | ---- | ---- | ---- |
+| companycode | Number(18) | 必填   |      | 公司代码 |
+| customcode  | Number(18) | 必填   |      | 客户代码 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                    | 类型         | 参数描述                      |
+| ---------------------- | ---------- | ------------------------- |
+| collect                | List<Node> | 收款单列表                     |
+| collect/accountname    | String     | 账号名称                      |
+| collect/accountno      | String     | 账号：卡号/支付宝账号等              |
+| collect/collectdate    | String     | 收款日期:格式yyyymmdd           |
+| collect/amount         | Number(11) | 金额(分)                     |
+| collect/remark         | String     | 备注                        |
+| receivable             | List<Node> | 未结清的相关单据列表(销售单/销售退货单/红冲单) |
+| receivable/type        | Number(2)  | 单据类型:1-销售单;2-销售退货单;3-红冲单  |
+| receivable/no          | String     | 单据编号                      |
+| receivable/code        | Number(18) | 单据代码                      |
+| receivable/operatedate | String     | 操作日期:格式yyyymmdd           |
+| receivable/amount      | Number(11) | 金额(分)                     |
+| receivable/remark      | String     | 备注                        |
+
+### 3.5.7 保存收款单
+url:sales/collect/add
+
+方法：POST
+
+功能描述：保存收款单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述           |
+| ----------- | ---------- | ---- | ---- | -------------- |
+| companycode | Number(18) | 必填   |      | 公司代码           |
+| customcode  | Number(18) | 必填   |      | 客户代码           |
+| accountcode | Number(18) | 必填   |      | 收款方式           |
+| collectno   | String     | 必填   |      | 收款单号           |
+| collecttype | Number(2)  | 必填   |      | 收款类型:1-收款 2-定金 |
+| amount      | Number(11) | 必填   |      | 收款金额           |
+| brokerage   | String     | 必填   |      | 经手人            |
+| collectdate | String     | 必填   |      | 收款日期(YYYYMMDD) |
+| remark      | String     | 必填   |      | 备注             |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名  | 类型   | 参数描述 |
+| ---- | ---- | ---- |
+| /    |      |      |
+
+### 3.5.8 查询收款单
+url:sales/collect/query
+
+方法：POST
+
+功能描述：根据客户、收款类型、收款方式和起止时间查询收款单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述           |
+| ----------- | ---------- | ---- | ---- | -------------- |
+| companycode | Number(18) | 必填   |      | 公司代码           |
+| customcode  | Number(18) | 可选   |      | 客户代码           |
+| collecttype | Number(2)  | 可选   |      | 收款类型:1-收款 2-定金 |
+| accountcode | Number(18) | 可选   |      | 收款方式           |
+| startdate   | String     | 必填   |      | 开始日期(YYYYMMDD) |
+| enddate     | String     | 必填   |      | 截止日期(YYYYMMDD) |
+| pageno      | Number(11) | 可选   | 1    | 页码             |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                 | 类型         | 参数描述            |
+| ------------------- | ---------- | --------------- |
+| collect             | List<Node> | 收款单列表           |
+| collect/orderno     | String     | 单号              |
+| collect/custom      | String     | 客户              |
+| collect/amount      | Number(18) | 金额(分)           |
+| collect/collecttype | Number(2)  | 收款类型:1-收款 2-定金  |
+| collect/accountname | String     | 收款方式            |
+| collect/accountno   | String     | 收款账号            |
+| collect/collectdate | String     | 收款日期:格式yyyymmdd |
+
+## 3.6 仓库管理
+
+### 3.6.1 查询销售单
+url:inventory/salesorder/query
+
+方法：POST
+
+功能描述：根据客户、销售单号、出库单号、出库状态查询销售单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名           | 类型         | 限制   | 默认值  | 参数描述             |
+| ------------- | ---------- | ---- | ---- | ---------------- |
+| companycode   | Number(18) | 必填   |      | 公司代码             |
+| customcode    | Number(18) | 可选   |      | 客户代码             |
+| orderno       | String     | 可选   |      | 销售单号             |
+| deliveryno    | String     | 可选   |      | 出库单号             |
+| deliverystate | Number(2)  | 必填   |      | 出库状态:1-未完成 2-已完成 |
+| pageno        | Number(11) | 可选   | 1    | 页码               |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                 | 类型         | 参数描述            |
+| ------------------- | ---------- | --------------- |
+| sales               | List<Node> | 销售单列表           |
+| sales/ordercode     | Number(18) | 代码              |
+| sales/orderno       | String     | 单号              |
+| sales/custom        | String     | 客户              |
+| sales/saledate      | String     | 收款日期:格式yyyymmdd |
+| sales/deliverystate | Number(2)  |                 |
+
+### 3.6.2 查询出库记录
+url:inventory/historydelivery/query
+
+方法：POST
+
+功能描述：根据销售单和起止时间查询收款单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名       | 类型         | 限制   | 默认值  | 参数描述  |
+| --------- | ---------- | ---- | ---- | ----- |
+| ordercode | Number(18) | 必填   |      | 销售单代码 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                              | 类型         | 参数描述            |
+| -------------------------------- | ---------- | --------------- |
+| delivery                         | List<Node> | 出库单记录           |
+| delivery/ordercode               | Number(18) | 代码              |
+| delivery/orderno                 | String     | 单号              |
+| delivery/custom                  | String     | 客户              |
+| delivery/vehiclelicence          | String     | 车牌号             |
+| delivery/brokerage               | String     | 经手人             |
+| delivery/deliverydate            | String     | 出库日期:格式yyyymmdd |
+| delivery/remark                  | String     |                 |
+| delivery/product                 | List<Node> |                 |
+| delivery/product/code            | Number(18) |                 |
+| delivery/product/name            | String     |                 |
+| delivery/product/depotcode       | Number(18) |                 |
+| delivery/product/unit            | String     |                 |
+| delivery/product/salenumber      | Number(11) |                 |
+| delivery/product/deliverednumber | Number(11) |                 |
+| delivery/product/currentnumber   | Number(18) |                 |
+
+### 3.6.3 查询销售单出库信息
+url:inventory/salesorder/deliveryinfo/query
+
+方法：POST
+
+功能描述：查询指定销售单的商品信息和客户等
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名       | 类型         | 限制   | 默认值  | 参数描述  |
+| --------- | ---------- | ---- | ---- | ----- |
+| ordercode | Number(18) | 必填   |      | 销售单代码 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                                | 类型         | 参数描述 |
+| ---------------------------------- | ---------- | ---- |
+| salesorder                         | Node       | 销售单  |
+| salesorder/ordercode               | Number(18) | 代码   |
+| salesorder/custom                  | String     | 客户   |
+| salesorder/product                 | List<Node> |      |
+| salesorder/product/no              | Number(18) |      |
+| salesorder/product/code            | Number(18) |      |
+| salesorder/product/name            | String     |      |
+| salesorder/product/depotcode       | Number(18) |      |
+| salesorder/product/unit            | String     |      |
+| salesorder/product/salenumber      | Number(11) |      |
+| salesorder/product/deliverednumber | Number(11) |      |
+
+### 3.6.4 商品出库
+url:inventory/delivery/add
+
+方法：POST
+
+功能描述：输入商品的出库数量及出库相关信息（车牌号、经手人、出库日期等）后保存出库单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名               | 类型         | 限制              | 默认值    | 参数描述  |
+| ----------------- | ---------- | --------------- | ------ | ----- |
+| ordercode         | Number(18) | 必填              |        | 销售单代码 |
+| vehiclelicence    | String     | 车牌号             |        |       |
+| brokerage         | String     | 经手人             |        |       |
+| deliverydate      | String     | 出库日期:格式yyyymmdd |        |       |
+| remark            | String     |                 | 备注     |       |
+| product           | List<Node> |                 | 商品出库明细 |       |
+| product/code      | Number(18) |                 | 商品代码   |       |
+| product/depotcode | Number(18) |                 | 仓库代码   |       |
+| product/number    | Number(11) |                 | 销售数量   |       |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名  | 类型   | 参数描述 |
+| ---- | ---- | ---- |
+| /    |      |      |
+
+### 3.6.5 查询出库单
+url:inventory/delivery/query
+
+方法：POST
+
+功能描述：根据客户、销售单号、出库单号和起止时间查询收款单
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述           |
+| ----------- | ---------- | ---- | ---- | -------------- |
+| customcode  | Number(18) | 可选   |      | 客户代码           |
+| saleorderno | String     | 可选   |      | 销售单号           |
+| deliveryno  | String     | 可选   |      | 出库单号           |
+| startdate   | String     | 必填   |      | 开始日期(YYYYMMDD) |
+| enddate     | String     | 必填   |      | 截止日期(YYYYMMDD) |
+| pageno      | Number(11) | 可选   | 1    | 页码             |
+
+请求样例：
+
+响应参数：
+
+| 参数名                    | 类型         | 参数描述            |
+| ---------------------- | ---------- | --------------- |
+| delivery               | List<Node> | 出库单记录           |
+| delivery/saleordercode | Number(18) | 销售单代码           |
+| delivery/saleorderno   | String     | 销售单单号           |
+| delivery/deliverycode  | Number(18) | 出库单代码           |
+| delivery/deliveryno    | String     | 出库单单号           |
+| delivery/deliverydate  | String     | 出库日期:格式yyyymmdd |
+| delivery/state         | Number(2)  | 状态: 0-未完成 1-已完成 |
+
+### 3.6.6 查询出库单详情
+url:inventory/delivery/detail
+
+方法：POST
+
+功能描述：根据出库单代码查详情
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名          | 类型         | 限制   | 默认值  | 参数描述  |
+| ------------ | ---------- | ---- | ---- | ----- |
+| deliverycode | Number(18) | 必填   |      | 出库单代码 |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名                     | 类型         | 参数描述 |
+| ----------------------- | ---------- | ---- |
+| product                 | List<Node> |      |
+| product/code            | Number(18) |      |
+| product/name            | String     |      |
+| product/depotcode       | Number(18) |      |
+| product/unit            | String     |      |
+| product/salenumber      | Number(11) |      |
+| product/deliverednumber | Number(11) |      |
+| product/currentnumber   | Number(18) |      |
+
+### 3.6.7 查询商品库存
+url:inventory/stock/query
+
+方法：POST
+
+功能描述：根据商品名称，模糊查询上架的商品库存信息
+
+版本支持：1.0.0
+
+请求参数：
+
+| 参数名         | 类型         | 限制   | 默认值  | 参数描述 |
+| ----------- | ---------- | ---- | ---- | ---- |
+| companycode | Number(18) | 必填   |      | 公司代码 |
+| productname | Number(18) | 可选   |      | 商品名称 |
+| pageno      | Number(11) | 可选   | 1    | 页码   |
+
+
+请求样例：
+
+响应参数：
+
+| 参数名              | 类型         | 参数描述 |
+| ---------------- | ---------- | ---- |
+| product          | List<Node> | 商品列表 |
+| product/no       | Number(18) | 编号   |
+| product/name     | String     | 名称   |
+| product/category | String     | 类型   |
+| product/unit     | String     | 单位   |
+| product/stock    | Number(11) |      |
