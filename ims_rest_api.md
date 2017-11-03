@@ -604,7 +604,7 @@ url:sys/user/get
 | user/companyname | String    | 公司名称        |
 
 ### 3.3.3 密码修改
-url:sys/user/get
+url:sys/password/change
 
 方法：POST
 
