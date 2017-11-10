@@ -729,18 +729,19 @@ url:sales/order/add
 | ------------------- | ---------- | ---- | ---- | -------------- |
 | companycode         | Number(18) | 必填   |      | 公司代码           |
 | customcode          | Number(18) | 必填   |      | 客户代码           |
-| orderno             | Number(18) | 必填   |      | 销货单单号          |
-| product             | List<Node> | 必填   |      | 进货商品清单         |
+| orderno             | String(18) | 必填   |      | 销货单单号          |
+| product             | List<Node> | 必填   |      | 销货商品清单         |
 | product/productcode | Number(18) | 必填   |      | 商品代码           |
 | product/number      | Number(11) | 必填   |      | 数量             |
 | product/price       | Number(11) | 必填   |      | 价格 单位(分)       |
 | product/depotcode   | Number(11) | 必填   |      | 仓库代码           |
+| collecttype         | Number(2)  | 必填   |      | 收款类型：1-收款 2-订金 |
 | accountcode         | Number(18) | 必填   |      | 收款方式           |
-| payamount           | Number(11) | 可选   |      | 收款金额           |
+| amount              | Number(11) | 可选   |      | 收款金额           |
 | vehiclelicence      | String     | 可选   |      | 车牌号            |
 | brokerage           | String     | 必填   |      | 经手人            |
 | saledate            | String     | 必填   |      | 销货日期(YYYYMMDD) |
-| remark              | String     | 必填   |      | 备注             |
+| remark              | String     | 可选   |      | 备注             |
 | multidelivery       | Number(2)  | 必填   |      | 多次出库:0-否 1-是   |
 | stalldelivery       | Number(2)  | 必填   |      | 档口出货:0-否 1-是   |
 
@@ -754,7 +755,7 @@ url:sales/order/add
 | ---- | ---- | ---- |
 | /    |      |      |
 
-### 3.5.2 打印销售单（待确认）
+### 3.5.2 打印销售单
 url:sales/order/print
 
 方法：POST
