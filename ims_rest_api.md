@@ -882,13 +882,13 @@ url:sales/order/detail
 | salesorder/product/productname | String     | 商品名称            |
 | salesorder/product/category    | String     | 商品分类            |
 | salesorder/product/unit        | String     | 库存单位            |
-| salesorder/product/stock       | Number(11) | 库存数量            |
+| salesorder/product/number      | Number(11) | 数量              |
 | salesorder/product/depot       | String     | 仓库名称            |
 | salesorder/product/price       | Number(11) | 价格(分)           |
 | salesorder/product/amount      | Number(11) | 金额(分)           |
 
 ### 3.5.6 查询收款信息
-url:purchase/collectinfo/query
+url:sales/collect/info/query
 
 方法：POST
 
@@ -908,21 +908,21 @@ url:purchase/collectinfo/query
 
 响应参数：
 
-| 参数名                    | 类型         | 参数描述                      |
-| ---------------------- | ---------- | ------------------------- |
-| collect                | List<Node> | 收款单列表                     |
-| collect/accountname    | String     | 账号名称                      |
-| collect/accountno      | String     | 账号：卡号/支付宝账号等              |
-| collect/collectdate    | String     | 收款日期:格式yyyymmdd           |
-| collect/amount         | Number(11) | 金额(分)                     |
-| collect/remark         | String     | 备注                        |
-| receivable             | List<Node> | 未结清的相关单据列表(销售单/销售退货单/红冲单) |
-| receivable/type        | Number(2)  | 单据类型:1-销售单;2-销售退货单;3-红冲单  |
-| receivable/no          | String     | 单据编号                      |
-| receivable/code        | Number(18) | 单据代码                      |
-| receivable/operatedate | String     | 操作日期:格式yyyymmdd           |
-| receivable/amount      | Number(11) | 金额(分)                     |
-| receivable/remark      | String     | 备注                        |
+| 参数名                 | 类型         | 参数描述                      |
+| ------------------- | ---------- | ------------------------- |
+| collect             | List<Node> | 收款单列表                     |
+| collect/accountname | String     | 账号名称                      |
+| collect/accountno   | String     | 账号：卡号/支付宝账号等              |
+| collect/collectdate | String     | 收款日期:格式yyyymmdd           |
+| collect/amount      | Number(11) | 金额(分)                     |
+| collect/remark      | String     | 备注                        |
+| receipt             | List<Node> | 未结清的相关单据列表(销售单/销售退货单/红冲单) |
+| receipt/type        | Number(2)  | 单据类型:1-销售单;2-销售退货单;3-红冲单  |
+| receipt/no          | String     | 单据编号                      |
+| receipt/code        | Number(18) | 单据代码                      |
+| receipt/operatedate | String     | 操作日期:格式yyyymmdd           |
+| receipt/amount      | Number(11) | 金额(分)                     |
+| receipt/remark      | String     | 备注                        |
 
 ### 3.5.7 保存收款单
 url:sales/collect/add
@@ -985,7 +985,7 @@ url:sales/collect/query
 | 参数名                 | 类型         | 参数描述            |
 | ------------------- | ---------- | --------------- |
 | collect             | List<Node> | 收款单列表           |
-| collect/orderno     | String     | 单号              |
+| collect/collectno   | String     | 单号              |
 | collect/custom      | String     | 客户              |
 | collect/amount      | Number(18) | 金额(分)           |
 | collect/collecttype | Number(2)  | 收款类型:1-收款 2-定金  |
