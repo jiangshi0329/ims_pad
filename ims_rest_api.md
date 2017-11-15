@@ -36,7 +36,7 @@
 | 3.5.3 | 分享销货单     | sales/order/share                       |
 | 3.5.4 | 查询销货单     | sales/order/query                       |
 | 3.5.5 | 销货单详情     | sales/order/detail                      |
-| 3.5.6 | 查询收款信息    | sales/collectinfo/query                 |
+| 3.5.6 | 查询收款信息    | sales/collect/info/query                |
 | 3.5.7 | 保存收款单     | sales/collect/add                       |
 | 3.5.8 | 查询收款单     | sales/collect/query                     |
 | 3.6   | 仓库管理      |                                         |
@@ -769,7 +769,7 @@ url:sales/order/print
 | 参数名       | 类型         | 限制   | 默认值  | 参数描述           |
 | --------- | ---------- | ---- | ---- | -------------- |
 | ordercode | Number(18) | 必填   |      | 销售单代码          |
-| type      | Number(2)  | 必填   |      | 打印类型：1-本地 2-远程 |
+| type      | Number(2)  | 必填   |      | 打印类型：0-本地 1-远程 |
 
 
 请求样例：
@@ -1020,14 +1020,14 @@ url:inventory/salesorder/query
 
 响应参数：
 
-| 参数名                 | 类型         | 参数描述            |
-| ------------------- | ---------- | --------------- |
-| sales               | List<Node> | 销售单列表           |
-| sales/ordercode     | Number(18) | 代码              |
-| sales/orderno       | String     | 单号              |
-| sales/custom        | String     | 客户              |
-| sales/saledate      | String     | 收款日期:格式yyyymmdd |
-| sales/deliverystate | Number(2)  |                 |
+| 参数名                      | 类型         | 参数描述                     |
+| ------------------------ | ---------- | ------------------------ |
+| salesorder               | List<Node> | 销售单列表                    |
+| salesorder/ordercode     | Number(18) | 代码                       |
+| salesorder/orderno       | String     | 单号                       |
+| salesorder/custom        | String     | 客户                       |
+| salesorder/saledate      | String     | 收款日期:格式yyyymmdd          |
+| salesorder/deliverystate | Number(2)  | 出库状态：0-未出库，1- 出库中，2- 已出库 |
 
 ### 3.6.2 查询出库记录
 url:inventory/historydelivery/query
@@ -1049,27 +1049,26 @@ url:inventory/historydelivery/query
 
 响应参数：
 
-| 参数名                              | 类型         | 参数描述            |
-| -------------------------------- | ---------- | --------------- |
-| delivery                         | List<Node> | 出库单记录           |
-| delivery/ordercode               | Number(18) | 代码              |
-| delivery/orderno                 | String     | 单号              |
-| delivery/custom                  | String     | 客户              |
-| delivery/vehiclelicence          | String     | 车牌号             |
-| delivery/brokerage               | String     | 经手人             |
-| delivery/deliverydate            | String     | 出库日期:格式yyyymmdd |
-| delivery/remark                  | String     |                 |
-| delivery/product                 | List<Node> |                 |
-| delivery/product/code            | Number(18) |                 |
-| delivery/product/name            | String     |                 |
-| delivery/product/depotcode       | Number(18) |                 |
-| delivery/product/unit            | String     |                 |
-| delivery/product/salenumber      | Number(11) |                 |
-| delivery/product/deliverednumber | Number(11) |                 |
-| delivery/product/currentnumber   | Number(18) |                 |
+| 参数名                            | 类型         | 参数描述            |
+| ------------------------------ | ---------- | --------------- |
+| delivery                       | List<Node> | 出库单记录           |
+| delivery/deliverycode          | Number(18) | 代码              |
+| delivery/deliveryno            | String     | 单号              |
+| delivery/custom                | String     | 客户              |
+| delivery/vehiclelicence        | String     | 车牌号             |
+| delivery/brokerage             | String     | 经手人             |
+| delivery/deliverydate          | String     | 出库日期:格式yyyymmdd |
+| delivery/remark                | String     | 备注              |
+| delivery/product               | List<Node> | 商品列表            |
+| delivery/product/code          | Number(18) | 代码              |
+| delivery/product/name          | String     | 名称              |
+| delivery/product/depot         | String     | 仓库              |
+| delivery/product/unit          | String     | 库存单位            |
+| delivery/product/salenumber    | Number(11) | 销售数量            |
+| delivery/product/currentnumber | Number(18) | 本次出库数量          |
 
 ### 3.6.3 查询销售单出库信息
-url:inventory/salesorder/deliveryinfo/query
+url:inventory/deliveryinfo/query
 
 方法：POST
 
@@ -1088,19 +1087,19 @@ url:inventory/salesorder/deliveryinfo/query
 
 响应参数：
 
-| 参数名                                | 类型         | 参数描述 |
-| ---------------------------------- | ---------- | ---- |
-| salesorder                         | Node       | 销售单  |
-| salesorder/ordercode               | Number(18) | 代码   |
-| salesorder/custom                  | String     | 客户   |
-| salesorder/product                 | List<Node> |      |
-| salesorder/product/no              | Number(18) |      |
-| salesorder/product/code            | Number(18) |      |
-| salesorder/product/name            | String     |      |
-| salesorder/product/depotcode       | Number(18) |      |
-| salesorder/product/unit            | String     |      |
-| salesorder/product/salenumber      | Number(11) |      |
-| salesorder/product/deliverednumber | Number(11) |      |
+| 参数名                                  | 类型         | 参数描述 |
+| ------------------------------------ | ---------- | ---- |
+| deliveryinfo                         | Node       | 销售单  |
+| deliveryinfo/ordercode               | Number(18) | 代码   |
+| deliveryinfo/custom                  | String     | 客户   |
+| deliveryinfo/product                 | List<Node> | 商品列表 |
+| deliveryinfo/product/no              | String     | 编号   |
+| deliveryinfo/product/code            | Number(18) | 代码   |
+| deliveryinfo/product/name            | String     | 名称   |
+| deliveryinfo/product/depotcode       | Number(18) | 仓库代码 |
+| deliveryinfo/product/unit            | String     |      |
+| deliveryinfo/product/salenumber      | Number(11) |      |
+| deliveryinfo/product/deliverednumber | Number(11) |      |
 
 ### 3.6.4 商品出库
 url:inventory/delivery/add
@@ -1113,17 +1112,17 @@ url:inventory/delivery/add
 
 请求参数：
 
-| 参数名               | 类型         | 限制              | 默认值    | 参数描述  |
-| ----------------- | ---------- | --------------- | ------ | ----- |
-| ordercode         | Number(18) | 必填              |        | 销售单代码 |
-| vehiclelicence    | String     | 车牌号             |        |       |
-| brokerage         | String     | 经手人             |        |       |
-| deliverydate      | String     | 出库日期:格式yyyymmdd |        |       |
-| remark            | String     |                 | 备注     |       |
-| product           | List<Node> |                 | 商品出库明细 |       |
-| product/code      | Number(18) |                 | 商品代码   |       |
-| product/depotcode | Number(18) |                 | 仓库代码   |       |
-| product/number    | Number(11) |                 | 销售数量   |       |
+| 参数名               | 类型         | 限制   | 默认值             | 参数描述 |
+| ----------------- | ---------- | ---- | --------------- | ---- |
+| ordercode         | Number(18) | 必填   | 销售单代码           |      |
+| vehiclelicence    | String     | 必填   | 车牌号             |      |
+| brokerage         | String     | 必填   | 经手人             |      |
+| deliverydate      | String     | 必填   | 出库日期:格式yyyymmdd |      |
+| remark            | String     |      | 备注              |      |
+| product           | List<Node> |      | 商品出库明细          |      |
+| product/code      | Number(18) |      | 商品代码            |      |
+| product/depotcode | Number(18) |      | 仓库代码            |      |
+| product/number    | Number(11) |      | 销售数量            |      |
 
 
 请求样例：
@@ -1145,28 +1144,29 @@ url:inventory/delivery/query
 
 请求参数：
 
-| 参数名         | 类型         | 限制   | 默认值  | 参数描述           |
-| ----------- | ---------- | ---- | ---- | -------------- |
-| customcode  | Number(18) | 可选   |      | 客户代码           |
-| saleorderno | String     | 可选   |      | 销售单号           |
-| deliveryno  | String     | 可选   |      | 出库单号           |
-| startdate   | String     | 必填   |      | 开始日期(YYYYMMDD) |
-| enddate     | String     | 必填   |      | 截止日期(YYYYMMDD) |
-| pageno      | Number(11) | 可选   | 1    | 页码             |
+| 参数名        | 类型         | 限制   | 默认值  | 参数描述           |
+| ---------- | ---------- | ---- | ---- | -------------- |
+| customcode | Number(18) | 可选   |      | 客户代码           |
+| orderno    | String     | 可选   |      | 销售单号           |
+| deliveryno | String     | 可选   |      | 出库单号           |
+| startdate  | String     | 必填   |      | 开始日期(YYYYMMDD) |
+| enddate    | String     | 必填   |      | 截止日期(YYYYMMDD) |
+| pageno     | Number(11) | 可选   | 1    | 页码             |
 
 请求样例：
 
 响应参数：
 
-| 参数名                    | 类型         | 参数描述            |
-| ---------------------- | ---------- | --------------- |
-| delivery               | List<Node> | 出库单记录           |
-| delivery/saleordercode | Number(18) | 销售单代码           |
-| delivery/saleorderno   | String     | 销售单单号           |
-| delivery/deliverycode  | Number(18) | 出库单代码           |
-| delivery/deliveryno    | String     | 出库单单号           |
-| delivery/deliverydate  | String     | 出库日期:格式yyyymmdd |
-| delivery/state         | Number(2)  | 状态: 0-未完成 1-已完成 |
+| 参数名                   | 类型         | 参数描述            |
+| --------------------- | ---------- | --------------- |
+| delivery              | List<Node> | 出库单记录           |
+| delivery/ordercode    | Number(18) | 销售单代码           |
+| delivery/orderno      | String     | 销售单单号           |
+| delivery/custom       | String     | 客户              |
+| delivery/deliverycode | Number(18) | 出库单代码           |
+| delivery/deliveryno   | String     | 出库单单号           |
+| delivery/deliverydate | String     | 出库日期:格式yyyymmdd |
+| delivery/state        | Number(2)  | 状态: 0-未完成 1-已完成 |
 
 ### 3.6.6 查询出库单详情
 url:inventory/delivery/detail
@@ -1181,6 +1181,7 @@ url:inventory/delivery/detail
 
 | 参数名          | 类型         | 限制   | 默认值  | 参数描述  |
 | ------------ | ---------- | ---- | ---- | ----- |
+| ordercode    | Number(18) | 必填   |      | 销售单代码 |
 | deliverycode | Number(18) | 必填   |      | 出库单代码 |
 
 
@@ -1193,10 +1194,9 @@ url:inventory/delivery/detail
 | product                 | List<Node> |      |
 | product/code            | Number(18) |      |
 | product/name            | String     |      |
-| product/depotcode       | Number(18) |      |
+| product/depot           | String     |      |
 | product/unit            | String     |      |
 | product/salenumber      | Number(11) |      |
-| product/deliverednumber | Number(11) |      |
 | product/currentnumber   | Number(18) |      |
 
 ### 3.6.7 查询商品库存
@@ -1221,11 +1221,12 @@ url:inventory/stock/query
 
 响应参数：
 
-| 参数名              | 类型         | 参数描述 |
-| ---------------- | ---------- | ---- |
-| product          | List<Node> | 商品列表 |
-| product/no       | Number(18) | 编号   |
-| product/name     | String     | 名称   |
-| product/category | String     | 类型   |
-| product/unit     | String     | 单位   |
-| product/stock    | Number(11) |      |
+| 参数名               | 类型         | 参数描述 |
+| ----------------- | ---------- | ---- |
+| stock             | List<Node> | 商品列表 |
+| stock/productno   | Number(18) | 编号   |
+| stock/productname | String     | 名称   |
+| stock/category    | String     | 类型   |
+| stock/depot       | String     | 仓库   |
+| stock/unit        | String     | 单位   |
+| stock/stock       | Number(11) | 数量   |
