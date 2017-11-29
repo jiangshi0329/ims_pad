@@ -601,6 +601,7 @@ url:sys/user/get
 | user/rolename    | String    | 角色名称        |
 | user/phone       | String    | 手机号         |
 | user/sex         | Number(2) | 性别:0-女; 1-男 |
+| user/companycode | String    | 公司代码        |
 | user/companyname | String    | 公司名称        |
 
 ### 3.3.3 密码修改
@@ -1189,15 +1190,15 @@ url:inventory/delivery/detail
 
 响应参数：
 
-| 参数名                     | 类型         | 参数描述 |
-| ----------------------- | ---------- | ---- |
-| product                 | List<Node> |      |
-| product/code            | Number(18) |      |
-| product/name            | String     |      |
-| product/depot           | String     |      |
-| product/unit            | String     |      |
-| product/salenumber      | Number(11) |      |
-| product/currentnumber   | Number(18) |      |
+| 参数名                   | 类型         | 参数描述 |
+| --------------------- | ---------- | ---- |
+| product               | List<Node> |      |
+| product/code          | Number(18) |      |
+| product/name          | String     |      |
+| product/depot         | String     |      |
+| product/unit          | String     |      |
+| product/salenumber    | Number(11) |      |
+| product/currentnumber | Number(18) |      |
 
 ### 3.6.7 查询商品库存
 url:inventory/stock/query
